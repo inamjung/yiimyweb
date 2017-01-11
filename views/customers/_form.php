@@ -86,8 +86,10 @@ use kartik\widgets\DepDrop;
         <div class="col-xs-3 col-sm-3 col-md-3">
             <?= $form->field($model, 'cid')->textInput(['maxlength' => true]) ?>
         </div>        
-        <div class="col-xs-3 col-sm-3 col-md-3">
-            <?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?>
+        <div class="col-xs-3 col-sm-3 col-md-3">            
+            <?= $form->field($model, 'tel')->widget(\yii\widgets\MaskedInput::classname(), [
+             'mask' => '99-9999-9999',
+                ]) ?>  
         </div>
     </div>
     <div class="row">
@@ -116,8 +118,20 @@ use kartik\widgets\DepDrop;
                 ]
             ]) ?>             
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3">
-            <?= $form->field($model, 'department_id')->textInput() ?> 
+        <div class="col-xs-3 col-sm-3 col-md-3">            
+            <?=
+            $form->field($model, 'department_id')->widget(DepDrop::className(), [
+                        'data' => [$ch],
+                        'options' => ['placeholder' => '<--เลือกแผนก-->'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['customers-group_id'],            
+                            'url' => yii\helpers\Url::to(['/customers/get-depart']),
+                            'loadingText' => 'Loading1...',
+                        ],
+                    ]);
+            ?>
         </div>        
     </div>
     <div class="row">
@@ -132,7 +146,8 @@ use kartik\widgets\DepDrop;
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         </div>            
         <div class="col-xs-3 col-sm-3 col-md-3">
-            <?= $form->field($model, 'interest')->textInput(['maxlength' => true]) ?> 
+            <?= $form->field($model, 'interest')
+                ->checkboxList(\app\models\Customers::itemAlias('interest')) ?>            
         </div>        
     </div>
     <hr>

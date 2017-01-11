@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Json;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "customers".
@@ -46,11 +48,11 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
             [['t', 'a', 'c', 'department_id', 'group_id'], 'integer'],
-            [['birthday', 'createdate', 'updatedate'], 'safe'],
+            [['birthday', 'createdate', 'updatedate', 'interest',], 'safe'],
             [['name'], 'string', 'max' => 150],
             [['addr', 'fb', 'line', 'email'], 'string', 'max' => 100],
             [['cid'], 'string', 'max' => 13],
-            [['p', 'tel', 'work', 'position_id', 'interest', 'avatar'], 'string', 'max' => 255],
+            [['p', 'tel', 'work', 'position_id', 'avatar'], 'string', 'max' => 255],
         ];
     }
 
@@ -82,5 +84,41 @@ class Customers extends \yii\db\ActiveRecord
             'createdate' => 'Createdate',
             'updatedate' => 'วันที่ชำระ',
         ];
+    }
+    public function getArray($value) {
+        return explode(',', $value);
+    }
+
+    public function setToArray($value) {
+        return is_array($value) ? implode(',', $value) : NULL;
+    }
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->name)) {
+                $this->interest = $this->setToArray($this->interest);  
+            }
+            return true;
+        } else {
+            return false;
+        }
+                
+    }
+    public static function itemAlias($type, $code = NULL) {
+        $_items = array(
+            
+            'interest' => [
+                'php' => 'PHP',
+                'yii' => 'YII',
+                'c++' => 'C++',
+                'c#' => 'C#',
+                'java' => 'JAVA',                              
+            ],            
+        );
+        if (isset($code)) {
+            return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
+        } else {
+            return isset($_items[$type]) ? $_items[$type] : false;
+        }
     }
 }

@@ -96,14 +96,18 @@ class CustomersController extends Controller
         $model = $this->findModel($id);
         $ch = ArrayHelper::map($this->getCh($model->c),'id','name');
         $am = ArrayHelper::map($this->getAm($model->a),'id','name');
+        $depart = ArrayHelper::map($this->getDepart($model->a),'id','name');
+        
+        $model->interest  = $model->getArray($model->interest);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'cw'=>$cw,
+                'ch'=>$ch,
                 'am'=>$am,
+                'depart'=>$depart
             ]);
         }
     }
@@ -172,7 +176,26 @@ class CustomersController extends Controller
     protected function getAm($id){
         $datas = Tmb::find()->where(['amp_id'=>$id])->all();
         return $this->MapData($datas,'id','name');
-    }    
+    }   
+    
+    public function actionGetDepart(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != NULL){
+                $group_id = $parents[0];
+                $out = $this->getDepart($group_id);
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }  
+     protected function getDepart($id){
+        $datas = \app\models\Departments::find()->where(['group_id'=>$id])->all();
+        return $this->MapData($datas,'id','name');
+    } 
+    
     protected function MapData($datas,$fieldID,$fieldName){
         $obj = [];
         foreach ($datas as $key => $value){
