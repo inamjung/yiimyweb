@@ -48,7 +48,8 @@ use kartik\widgets\Select2;
         </div>  
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <?php
-            $a = ['10' => 'จ่ายเงินสด', '89' => 'บัตรทอง'];
+                $a = ['10' => 'จ่ายเงินสด', '89' => 'บัตรทอง'];
+        //$a =    ArrayHelper::map(\app\models\Departmentrisk::find()->all(), 'id', 'name');
             echo Select2::widget([
                 'name' => 'pttype',
                 'data' => $a,
