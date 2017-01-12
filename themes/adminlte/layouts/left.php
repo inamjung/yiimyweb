@@ -59,19 +59,19 @@ use yii\bootstrap\Nav;
             <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->            
             <li class="treeview active">
                 <a href="#">
-                    <i class="glyphicon glyphicon-list"></i> <span>ระบบแจ้งซ่อม</span>
+                    <i class="glyphicon glyphicon-wrench"></i> <span>ระบบแจ้งซ่อม</span>
                     <i class="fa pull-right fa-angle-down"></i>
                 </a>
                 <ul class="treeview-menu">
 
                     <li><a href="<?php echo Url::to(['/report/hosxpreport/personpttype']); ?>"><i class="fa fa-circle text-red"></i> 
                             <span>
-                                จำนวนผู้ป่วยตามสิทธิ์</span><small class="label pull-right bg-aqua"></small>
+                                แจ้งซ่อม</span><small class="label pull-right bg-aqua"></small>
                         </a>
                     </li>  
                     <li><a href="<?php echo Url::to(['/report/hosxpreport/opddiag']); ?>"><i class="fa fa-circle text-yellow"></i> 
                             <span>
-                                ๑๐ อันดับโรค</span><small class="label pull-right bg-aqua"></small>
+                                รับซ่อม</span><small class="label pull-right bg-aqua"></small>
                         </a>
                     </li> 
                 </ul>                

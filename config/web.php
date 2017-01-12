@@ -78,6 +78,9 @@ $config = [
         'report' => [
             'class' => 'app\modules\report\Module',
         ],
+        'repair' => [
+            'class' => 'app\modules\repair\Module',
+        ],
     ],
     'params' => $params,
 ];
