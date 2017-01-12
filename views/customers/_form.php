@@ -4,7 +4,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\DepDrop;
-
+use yii\web\UploadedFile;
 
 
 /* @var $this yii\web\View */
@@ -152,8 +152,11 @@ use kartik\widgets\DepDrop;
         </div>        
     </div>
     <hr>
+            <?= $form->field($model, 'img')->label('รูปประจำตัว')->fileInput() ?>  
    
-            <?= $form->field($model, 'avatar')->label('รูปประจำตัว')->textInput(['maxlength' => true]) ?>
+           <?php if ($model->avatar) { ?>
+                  <?php  Html::img('avatars/' . $model->avatar, ['class' => 'img-responsive img-circle', 'width' => '150px;']); ?>
+           <?php } ?> 
    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '<i class="glyphicon glyphicon-ok"></i> บันทึก' : '<i class="glyphicon glyphicon-ok"></i> บันทึกการแก้ไข', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

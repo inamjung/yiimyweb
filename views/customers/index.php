@@ -18,46 +18,50 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Customers', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'formatter'=>['class'=>'yii\i18n\Formatter','nullDisplay'=>'-'],
+        'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
 //            'id',
-            'name',
-            'addr',            
             [
-              'attribute'=>'c' ,
-                'value'=>'chwname.name',
-            ],
-            [
-              'attribute'=>'a' ,
-                'value'=>'ampurname.name',
-            ],
-            [
-              'attribute'=>'t' ,
-                'value'=>'tubname.name',
-            ],
-            'p',
-             'cid',
-            
-             'tel',
-             'work',
-             
-             [ 'attribute'=>'department_id',
-              'value'=>'dep.name',
-            ],
-            
-             [ 'attribute'=>'group_id',
-              'value'=>'group.name',
-            ],
-             
-             [
-              'attribute'=>'position_id',
-              'value'=>'position.name',
-            ],
+                'attribute' => 'avatar',
+                'format' => 'html',
+                'value' => function($model) {
+                    return html::img('avatars/' . $model->avatar, ['class' => 'thumbnail-responsive',
+                                'style' => 'width: 100px;']);
+                }
+                    ],
+                    'name',
+                    'addr',
+                    [
+                        'attribute' => 'c',
+                        'value' => 'chwname.name',
+                    ],
+                    [
+                        'attribute' => 'a',
+                        'value' => 'ampurname.name',
+                    ],
+                    [
+                        'attribute' => 't',
+                        'value' => 'tubname.name',
+                    ],
+                    'p',
+                    'cid',
+                    'tel',
+                    'work',
+                    [ 'attribute' => 'department_id',
+                        'value' => 'dep.name',
+                    ],
+                    [ 'attribute' => 'group_id',
+                        'value' => 'group.name',
+                    ],
+                    [
+                        'attribute' => 'position_id',
+                        'value' => 'position.name',
+                    ],
 //             'interest',
 //             'avatar',
 //             'fb',
@@ -65,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //             'email:email',
 //             'createdate',
 //             'updatedate',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]);
+            ?>
 </div>

@@ -36,6 +36,7 @@ class Customers extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $img;
     public static function tableName()
     {
         return 'customers';
@@ -53,6 +54,7 @@ class Customers extends \yii\db\ActiveRecord
             [['addr', 'fb', 'email'], 'string', 'max' => 100],
             [['cid'], 'string', 'max' => 13],
             [['p', 'tel', 'work', 'position_id', 'avatar'], 'string', 'max' => 255],
+            [['img'],'file','skipOnEmpty'=>true,'extensions'=>'jpg,png,gif','on'=>'update']
         ];
     }
 
@@ -83,6 +85,7 @@ class Customers extends \yii\db\ActiveRecord
             'email' => 'Email',
             'createdate' => 'Createdate',
             'updatedate' => 'วันที่ชำระ',
+            'img' => 'รูปภาพ',
         ];
     }
     public function getArray($value) {

@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?= Html::img('avatars/'.$model->avatar,['class'=>'thumbnail img-responsive','style'=>'widht: 100 px;'])?>
 
     <?= DetailView::widget([
         'model' => $model,

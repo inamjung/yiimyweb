@@ -75,8 +75,18 @@ class CustomersController extends Controller
     public function actionCreate()
     {
         $model = new Customers();
+        
+        
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($model,'img');             
+             if(isset($file->size) && $file->size!=0){
+                $model->avatar = $file->name;
+                $file->saveAs('avatars/'.$file->name);                   
+                }
+            
+            $model->save();
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -101,7 +111,14 @@ class CustomersController extends Controller
         $model->interest  = $model->getArray($model->interest);
         $model->line  = $model->getArray($model->line);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+             $file = UploadedFile::getInstance($model,'img');             
+             if(isset($file->size) && $file->size!=0){
+                $model->avatar = $file->name;
+                $file->saveAs('avatars/'.$file->name);                   
+                }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
