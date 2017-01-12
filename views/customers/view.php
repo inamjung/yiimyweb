@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'formatter'=>['class'=>'yii\i18n\Formatter','nullDisplay'=>'-'],
         'attributes' => [
             //'id',
             'name',
@@ -35,9 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'c',
               'value'=>$model->chwname->name,
             ],
-            //'chwname.name',
-            'ampurname.name',
-            'tubname.name',           
+            [
+              'attribute'=>'a',
+              'value'=>$model->ampurname->name,
+            ],
+            [
+              'attribute'=>'t',
+              'value'=>$model->tubname->name,
+            ],                     
             'birthday',
             'cid',
             'p',
