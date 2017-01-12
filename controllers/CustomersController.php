@@ -75,8 +75,6 @@ class CustomersController extends Controller
     public function actionCreate()
     {
         $model = new Customers();
-        
-        
 
         if ($model->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($model,'img');             
@@ -111,8 +109,7 @@ class CustomersController extends Controller
         $model->interest  = $model->getArray($model->interest);
         $model->line  = $model->getArray($model->line);
 
-        if ($model->load(Yii::$app->request->post())) {
-            
+        if ($model->load(Yii::$app->request->post())) {            
              $file = UploadedFile::getInstance($model,'img');             
              if(isset($file->size) && $file->size!=0){
                 $model->avatar = $file->name;

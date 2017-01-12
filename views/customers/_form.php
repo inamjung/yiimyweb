@@ -14,7 +14,11 @@ use yii\web\UploadedFile;
 
 <div class="customers-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(
+            ['options'=>[
+                'enctype'=>'multipart/form-data'
+            ]]
+            ); ?>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-3">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
