@@ -142,4 +142,7 @@ class Customers extends \yii\db\ActiveRecord
     public function getGroup(){
         return $this->hasOne(Groups::className(), ['id'=>'group_id']);
     }
+    public function getDep(){
+        return $this->hasOne(Departments::className(), ['id'=>'department_id']);
+    }
 }

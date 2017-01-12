@@ -39,17 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'t' ,
                 'value'=>'tubname.name',
             ],
-            
+            'p',
              'cid',
-             [
-              'attribute'=>'p' ,
-              'value'=>'position.name',
-            ],
+            
              'tel',
              'work',
-             'department_id',
-             'group_id',
-             'position_id',
+             
+             [ 'attribute'=>'department_id',
+              'value'=>'dep.name',
+            ],
+            
+             [ 'attribute'=>'group_id',
+              'value'=>'group.name',
+            ],
+             
+             [
+              'attribute'=>'position_id',
+              'value'=>'position.name',
+            ],
 //             'interest',
 //             'avatar',
 //             'fb',
