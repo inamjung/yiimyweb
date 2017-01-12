@@ -8,54 +8,54 @@ use yii\widgets\ActiveForm;
 use miloschuman\highcharts\Highcharts;
 ?>
 <?php $form = ActiveForm::begin(['method' => 'get',
-'action' => Url::to(['hosxpreport/opddiag'])]);?>
+            'action' => Url::to(['hosxpreport/opddiag'])]);
+?>
 <div class="well">
     ระหว่างวันที่:
-        <div class="row">
+    <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-4">
             <?php
-        echo yii\jui\DatePicker::widget([
-            'name' => 'date1',
-            'value' => $date1,
-            'language' => 'th',
-            'dateFormat' => 'yyyy-MM-dd',
-            'clientOptions' => [
-                'changeMonth' => true,
-                'changeYear' => true,
-            ],
-            'options'=>[
-                'class'=>'form-control'
-            ],
-        ]);
-        ?>           
-        ถึงวันที่:
-        <?php
-        echo yii\jui\DatePicker::widget([
-            'name' => 'date2',
-            'value' => $date2,
-            'language' => 'th',
-            'dateFormat' => 'yyyy-MM-dd',
-            'clientOptions' => [
-                'changeMonth' => true,
-                'changeYear' => true,
-            ],
-            'options'=>[
-                'class'=>'form-control'
-            ],            
-        ]);
-        ?>
+            echo yii\jui\DatePicker::widget([
+                'name' => 'date1',
+                'value' => $date1,
+                'language' => 'th',
+                'dateFormat' => 'yyyy-MM-dd',
+                'clientOptions' => [
+                    'changeMonth' => true,
+                    'changeYear' => true,
+                ],
+                'options' => [
+                    'class' => 'form-control'
+                ],
+            ]);
+            ?>           
+            ถึงวันที่:
+            <?php
+            echo yii\jui\DatePicker::widget([
+                'name' => 'date2',
+                'value' => $date2,
+                'language' => 'th',
+                'dateFormat' => 'yyyy-MM-dd',
+                'clientOptions' => [
+                    'changeMonth' => true,
+                    'changeYear' => true,
+                ],
+                'options' => [
+                    'class' => 'form-control'
+                ],
+            ]);
+            ?>
         </div>        
-            
+
         <div class="col-xs-4 col-sm-4 col-md-2">
             <button class='btn btn-danger'>ประมวลผล</button>
         </div>    
-         
-</div>      
+
+    </div>      
 </div>
 
-<?php ActiveForm::end();?>
+<?php ActiveForm::end(); ?>
 <?php
-
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
@@ -73,7 +73,16 @@ $gridColumns = [
         'label' => 'จำนวน',
         'headerOptions' => ['class' => 'text-center'],
         'contentOptions' => ['class' => 'text-center'],
-        
+        'format' => 'raw',
+        'value' => function($model)use($pdx, $date1, $date2) {
+            return Html::a(Html::encode($model['a']), [
+                '/report/hosxpreport/subopddiag',
+                'pdx' => $model['pdx'],
+                'date1' => $date1,
+                'date2' => $date2
+                    ]
+    );
+}
     ],
 ];
 echo GridView::widget([
@@ -93,7 +102,6 @@ echo GridView::widget([
 ?>
 
 <?php
-
 echo Highcharts::widget([
     'options' => [
         'credits' => ['enabled' => false],

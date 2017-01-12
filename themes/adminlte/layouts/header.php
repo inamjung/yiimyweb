@@ -1,67 +1,65 @@
 <?php
 use yii\helpers\Html;
-
+use yii\bootstrap\Nav;
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini"><img style="height:40px; margin-top:12px;" src="./img/budget.png"></span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini"><img style="height:40px; margin-top:1px;" src="./img/swl.png"></span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        <?php
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right',
+                    'encodeLabels'=>false
+                    ],
+                'items' => [  
+                    ['label' => ' เข้าสู่ระบบ', 'url' => ['/user/security/login'], 'visible' => Yii::$app->user->isGuest],
+                    //['label' => ' สมัครใช้งาน', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest],
+                ],
+            ]);        
+        ?>
 
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-
-                <!-- Messages: style can be found in dropdown.less-->
-                
-                
-                <!-- Tasks: style can be found in dropdown.less -->
-                
-                <!-- User Account: style can be found in dropdown.less -->
-
+                <?php if(!Yii::$app->user->isGuest){ ?>
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">           
+                        <i class="glyphicon glyphicon-user"></i>                           
+
+                        <span class="hidden-xs">
+                            <?php echo Yii::$app->user->identity->username;?>
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
-
+<!--                            <div> <?= Html::img('avatars/' . Yii::$app->user->identity->avatar, 
+                                     ['class' => 'img-circle','width' => '120px;']) ?>
+                            </div>-->
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <?php echo Yii::$app->user->identity->username;?>
                             </p>
+
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
+                        
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="<?php //echo Url::to(['/users/indexuser']); ?>" class="btn btn-default btn-flat">ข้อมูลส่วนตัว</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
-                                    'Sign out',
+                                    'ออกจากระบบ',
                                     ['/site/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
                                 ) ?>
@@ -69,9 +67,7 @@ use yii\helpers\Html;
                         </li>
                     </ul>
                 </li>
-
-                <!-- User Account: style can be found in dropdown.less -->
-             
+                <?php } ?>
             </ul>
         </div>
     </nav>
