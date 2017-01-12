@@ -139,7 +139,8 @@ use kartik\widgets\DepDrop;
             <?= $form->field($model, 'fb')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3">
-            <?= $form->field($model, 'line')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'line') 
+                    ->checkboxList(\app\models\Customers::itemAlias('line')) ?> 
 
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3">

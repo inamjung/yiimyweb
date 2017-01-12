@@ -12,15 +12,20 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="customers-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="panel panel-info">
+        <div class="panel-heading"> ข้อมูลพนักงาน</div>
+        <div class="panel-body">
+            <?=
+            $this->render('_form', [
+                'model' => $model,
+                'ch' => $ch,
+                'am' => $am,
+                'depart' => $depart
+            ])
+            ?>
+        </div>
+    </div>
 
-    <?=
-    $this->render('_form', [
-        'model' => $model,
-        'ch' => $ch,
-        'am' => $am,
-        'depart'=>$depart
-    ])
-    ?>
+
 
 </div>

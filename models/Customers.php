@@ -48,9 +48,9 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
             [['t', 'a', 'c', 'department_id', 'group_id'], 'integer'],
-            [['birthday', 'createdate', 'updatedate', 'interest',], 'safe'],
+            [['birthday', 'createdate', 'updatedate', 'interest','line', ], 'safe'],
             [['name'], 'string', 'max' => 150],
-            [['addr', 'fb', 'line', 'email'], 'string', 'max' => 100],
+            [['addr', 'fb', 'email'], 'string', 'max' => 100],
             [['cid'], 'string', 'max' => 13],
             [['p', 'tel', 'work', 'position_id', 'avatar'], 'string', 'max' => 255],
         ];
@@ -97,6 +97,7 @@ class Customers extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if (!empty($this->name)) {
                 $this->interest = $this->setToArray($this->interest);  
+                $this->line = $this->setToArray($this->line);
             }
             return true;
         } else {
@@ -113,12 +114,32 @@ class Customers extends \yii\db\ActiveRecord
                 'c++' => 'C++',
                 'c#' => 'C#',
                 'java' => 'JAVA',                              
-            ],            
+            ], 
+            'line'=>[
+                'tt'=>'11',
+                'yy'=>'22'
+            ]
         );
         if (isset($code)) {
             return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
         } else {
             return isset($_items[$type]) ? $_items[$type] : false;
         }
+    }
+    
+    public function  getPosition(){
+    return $this->hasOne(Positions::className(), ['id'=>'position_id']);
+    }
+    public function getAmpurname(){
+        return $this->hasOne(Amp::className(), ['id'=>'a']);
+    }
+    public function getChwname(){
+        return $this->hasOne(Amp::className(), ['id'=>'c']);
+    }
+    public function getTubname(){
+        return $this->hasOne(Amp::className(), ['id'=>'t']);
+    }
+    public function getGroup(){
+        return $this->hasOne(Groups::className(), ['id'=>'group_id']);
     }
 }

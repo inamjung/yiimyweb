@@ -99,6 +99,7 @@ class CustomersController extends Controller
         $depart = ArrayHelper::map($this->getDepart($model->a),'id','name');
         
         $model->interest  = $model->getArray($model->interest);
+        $model->line  = $model->getArray($model->line);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

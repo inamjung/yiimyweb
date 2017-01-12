@@ -26,13 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'name',
-            'addr',
-            't',
-            'a',
-             'c',
-            // 'birthday',
+            'addr',            
+            [
+              'attribute'=>'c' ,
+                'value'=>'chwname.name',
+            ],
+            [
+              'attribute'=>'a' ,
+                'value'=>'ampurname.name',
+            ],
+            [
+              'attribute'=>'t' ,
+                'value'=>'tubname.name',
+            ],
+            
              'cid',
-             'p',
+             [
+              'attribute'=>'p' ,
+              'value'=>'position.name',
+            ],
              'tel',
              'work',
              'department_id',
