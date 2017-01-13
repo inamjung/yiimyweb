@@ -105,5 +105,32 @@ class HosxpreportController extends Controller{
             'icdname'=>$icdname            
         ]);
     }
+    
+    public function actionPatient($cid=null){
+        
+        $sql = "select cid , hn, pname ,fname,lname 
+                from patient 
+                where cid='3430300510561'";
+        
+         try {
+            $rawData = \Yii::$app->db2->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels'=>$rawData,            
+        ]);
+        return $this->render('patient', [
+            'dataProvider' => $dataProvider,
+            'rawData' => $rawData,
+            'sql'=>$sql,
+            'cid'=>$cid,                    
+        ]);
+    }
+    
+    public function acionInsertpt(){
+        
+        //$pt = new ;
+    }
 }
 

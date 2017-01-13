@@ -81,6 +81,9 @@ $config = [
         'repair' => [
             'class' => 'app\modules\repair\Module',
         ],
+        'risk' => [
+            'class' => 'app\modules\risk\Module',
+        ],
     ],
     'params' => $params,
 ];
