@@ -12,11 +12,16 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="cal-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1><?= Html::encode($this->title) ?></h1>-->
 
-    <?= $this->render('_form', [
+    <div class="panel panel-info">
+        <div class="panel-heading"> แก้ไขการสอบเทียบเครื่องมือ</div>
+        <div class="panel-body">
+           <?= $this->render('_form', [
         'model' => $model,
         'modelDetails' => $modelDetails
-    ]) ?>
-
+    ]) ?> 
+        </div>
+    </div>
 </div>
+

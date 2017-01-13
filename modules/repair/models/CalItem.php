@@ -93,4 +93,7 @@ class CalItem extends \yii\db\ActiveRecord
     public function getCals(){
         return $this->hasOne(Cal::className(), ['id'=>'cal_id']);
     }
+     public function getCaltool(){
+        return $this->hasOne(Tools::className(), ['id'=>'tool_id']);
+    }
 }

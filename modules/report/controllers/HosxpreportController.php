@@ -110,9 +110,9 @@ class HosxpreportController extends Controller{
         ]);
     }
     
-    public function actionPatient($cid=null,$hos_guid=null){
+    public function actionPatient($cid=null){
         
-        $sql = "select hos_guid,cid , hn, pname ,fname,lname 
+        $sql = "select cid , hn, pname ,fname,lname 
                 from patient 
                 where cid='$cid'";
         
@@ -126,8 +126,7 @@ class HosxpreportController extends Controller{
         ]);
         return $this->render('patient', [
             'dataProvider' => $dataProvider,
-            'rawData' => $rawData,
-            'hos_guid'=>$hos_guid,
+            'rawData' => $rawData,            
             'sql'=>$sql,
             'cid'=>$cid,                    
         ]);

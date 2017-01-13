@@ -101,6 +101,27 @@ use yii\bootstrap\Nav;
                                 ข้อมูลผู้ป่วย</span><small class="label pull-right bg-aqua"></small>
                         </a>
                     </li>  
+                    <li><a href="<?php echo Url::to(['/patient/index']); ?>"><i class="fa fa-circle text-red"></i> 
+                            <span>
+                                ข้อมูลในตารางpatient</span><small class="label pull-right bg-aqua"></small>
+                        </a>
+                    </li>
+                </ul>                
+                </ul>
+                <ul class="sidebar-menu">
+            <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->            
+            <li class="treeview active">
+                <a href="#">
+                    <i class="glyphicon glyphicon-download"></i> <span>ตัวอย่าง multiple input</span>
+                    <i class="fa pull-right fa-angle-down"></i>
+                </a>
+                <ul class="treeview-menu">
+
+                    <li><a href="<?php echo Url::to(['/repair/cal/index']); ?>"><i class="fa fa-circle text-red"></i> 
+                            <span>
+                                บันทึกข้อมูลรายการ</span><small class="label pull-right bg-aqua"></small>
+                        </a>
+                    </li>  
                     
                 </ul>                
                 </ul>

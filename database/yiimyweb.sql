@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2017-01-13 16:16:27
+Date: 2017-01-13 20:55:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1690,7 +1690,6 @@ CREATE TABLE `cal_item` (
 -- Records of cal_item
 -- ----------------------------
 INSERT INTO `cal_item` VALUES ('1', '2', 'ผ่าน', null, null, null, '1', null);
-INSERT INTO `cal_item` VALUES ('2', '1', 'ผ่าน', null, null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for chw
@@ -2038,11 +2037,14 @@ CREATE TABLE `patient` (
   `fname` varchar(255) DEFAULT NULL,
   `lname` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of patient
 -- ----------------------------
+INSERT INTO `patient` VALUES ('1', '3430300510561', '000056441', 'น.ส.', 'ไอน้ำ', 'เรืองโพน');
+INSERT INTO `patient` VALUES ('2', '1430300102881', '000024050', 'นาง', 'พนิตตา', 'สุวรรณเขต');
+INSERT INTO `patient` VALUES ('5', '3300800085690', '000058199', 'น.ส.', 'ศิริพร', 'บัวสุนทร');
 
 -- ----------------------------
 -- Table structure for positions

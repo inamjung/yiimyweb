@@ -37,10 +37,9 @@ $gridColumns = [
         'headerOptions' => ['class' => 'text-center'],
         'contentOptions' => ['class' => 'text-center'],
         'format' => 'raw',
-        'value' => function($model, $key, $widget)use($cid,$hos_guid) {
+        'value' => function($model, $key, $widget)use($cid) {
             return Html::a(Html::encode($model['cid']), [
-                '/report/hosxpreport/insertpt',
-                //'id' => $model['hos_guid'],
+                '/report/hosxpreport/insertpt',               
                 'cid' => $model['cid'],
                 'hn' => $model['hn'],
                 'pname' => $model['pname'],
