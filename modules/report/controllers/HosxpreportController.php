@@ -110,9 +110,9 @@ class HosxpreportController extends Controller{
         ]);
     }
     
-    public function actionPatient($cid=null){
+    public function actionPatient($cid=null,$hos_guid=null){
         
-        $sql = "select cid , hn, pname ,fname,lname 
+        $sql = "select hos_guid,cid , hn, pname ,fname,lname 
                 from patient 
                 where cid='$cid'";
         
@@ -127,14 +127,15 @@ class HosxpreportController extends Controller{
         return $this->render('patient', [
             'dataProvider' => $dataProvider,
             'rawData' => $rawData,
+            'hos_guid'=>$hos_guid,
             'sql'=>$sql,
             'cid'=>$cid,                    
         ]);
     }
     
-    public function acionInsertpt($cid=null,$hn=null,$pname=null,$fname=null,$lname=null){
+    public function actionInsertpt($cid=null,$hn=null,$pname=null,$fname=null,$lname=null){
         
-        $pt = new \app\models\Patient();
+        $pt = new Patient();
         
         $pt->cid = $cid;
         $pt->hn = $hn;
@@ -144,7 +145,7 @@ class HosxpreportController extends Controller{
         
         
         $pt->save();
-        return $this->redirect(['hosxpreport/patient']);
+        return $this->redirect(['/report/hosxpreport/patient']);
     }
 }
 

@@ -33,8 +33,24 @@ $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
         'attribute' => 'cid',
-        'label' => 'CID',
-        'headerOptions' => ['class' => 'text-center']
+        'label' => 'CID/ส่งค่าบันทึกในpatient',
+        'headerOptions' => ['class' => 'text-center'],
+        'contentOptions' => ['class' => 'text-center'],
+        'format' => 'raw',
+        'value' => function($model, $key, $widget)use($cid,$hos_guid) {
+            return Html::a(Html::encode($model['cid']), [
+                '/report/hosxpreport/insertpt',
+                //'id' => $model['hos_guid'],
+                'cid' => $model['cid'],
+                'hn' => $model['hn'],
+                'pname' => $model['pname'],
+                'fname' => $model['fname'],
+                'lname' => $model['lname'],
+                
+             
+                    ]
+    );
+}
     ],
     [
         'attribute' => 'hn',
@@ -56,26 +72,7 @@ $gridColumns = [
         'label' => 'นามสกุล',
         'headerOptions' => ['class' => 'text-center']
     ],
-    [
-        'attribute' => 'cid',
-        'label' => 'จำนวน',
-        'headerOptions' => ['class' => 'text-center'],
-        'contentOptions' => ['class' => 'text-center'],
-        'format' => 'raw',
-        'value' => function($model)use($cid) {
-            return Html::a(Html::encode($model['cid']), [
-                '/report/hosxpreport/insertpt',
-                'cid' => $model['cid'],
-                'hn' => $model['hn'],
-                'pname' => $model['pname'],
-                'fname' => $model['fname'],
-                'lname' => $model['lname'],
-                
-             
-                    ]
-    );
-}
-    ],
+    
 ];
 echo GridView::widget([
     'dataProvider' => $dataProvider,

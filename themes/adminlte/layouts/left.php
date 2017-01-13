@@ -87,6 +87,23 @@ use yii\bootstrap\Nav;
                     </li>
                 </ul>                
                 </ul>
+                <ul class="sidebar-menu">
+            <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->            
+            <li class="treeview active">
+                <a href="#">
+                    <i class="glyphicon glyphicon-download"></i> <span>คิวรี ส่งค่าไปบันทึก</span>
+                    <i class="fa pull-right fa-angle-down"></i>
+                </a>
+                <ul class="treeview-menu">
+
+                    <li><a href="<?php echo Url::to(['/report/hosxpreport/patient']); ?>"><i class="fa fa-circle text-red"></i> 
+                            <span>
+                                ข้อมูลผู้ป่วย</span><small class="label pull-right bg-aqua"></small>
+                        </a>
+                    </li>  
+                    
+                </ul>                
+                </ul>
 
     </section>
 
