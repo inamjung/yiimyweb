@@ -55,7 +55,7 @@ use yii\helpers\Url;
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?php //echo Url::to(['/users/indexuser']); ?>" class="btn btn-default btn-flat">ข้อมูลส่วนตัว</a>
+                                <a href="<?php echo Url::to(['/users/index']); ?>" class="btn btn-default btn-flat">ข้อมูลส่วนตัว</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
