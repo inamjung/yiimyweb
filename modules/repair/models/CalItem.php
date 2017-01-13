@@ -21,6 +21,34 @@ class CalItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    
+    const UPDATE_TYPE_CREATE = 'create';
+    const UPDATE_TYPE_UPDATE = 'update';
+    const UPDATE_TYPE_DELETE = 'delete';
+
+    const SCENARIO_BATCH_UPDATE = 'batchUpdate';
+
+
+    private $_updateType;
+
+    public function getUpdateType()
+    {
+        if (empty($this->_updateType)) {
+            if ($this->isNewRecord) {
+                $this->_updateType = self::UPDATE_TYPE_CREATE;
+            } else {
+                $this->_updateType = self::UPDATE_TYPE_UPDATE;
+            }
+        }
+
+        return $this->_updateType;
+    }
+
+    public function setUpdateType($value)
+    {
+        $this->_updateType = $value;
+    }
+    
     public static function tableName()
     {
         return 'cal_item';
@@ -32,6 +60,13 @@ class CalItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+             ['updateType', 'required', 'on' => self::SCENARIO_BATCH_UPDATE],
+            ['updateType',
+                'in',
+                'range' => [self::UPDATE_TYPE_CREATE, self::UPDATE_TYPE_UPDATE, self::UPDATE_TYPE_DELETE],
+                'on' => self::SCENARIO_BATCH_UPDATE]
+            ,
+            
             [['tool_id', 'department_id', 'cal_id'], 'integer'],
             [['result', 'remark'], 'string', 'max' => 255],
             [['number_group'], 'string', 'max' => 20],
@@ -54,5 +89,8 @@ class CalItem extends \yii\db\ActiveRecord
             'cal_id' => 'Cal ID',
             'remark' => 'เพิ่มเติม',
         ];
+    }
+    public function getCals(){
+        return $this->hasOne(Cal::className(), ['id'=>'cal_id']);
     }
 }

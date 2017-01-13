@@ -48,4 +48,8 @@ class Cal extends \yii\db\ActiveRecord
             'next' => 'สอบเทียบครั้งถัดไป',
         ];
     }
+    
+    public function getCaldetail(){
+        return $this->hasMany(CalItem::className(), ['cal_id'=>'id']);
+    }
 }

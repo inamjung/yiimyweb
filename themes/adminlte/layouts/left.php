@@ -34,8 +34,11 @@ use yii\bootstrap\Nav;
                         </a>
                     </li>          
                 </ul>
+<?php if (!Yii::$app->user->isGuest) { ?>
+            <?php  if(Yii::$app->user->identity->role == dektrium\user\models\User::ROLE_ADMIN) {?>
                 <ul class="sidebar-menu">
-            <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->            
+            <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->    
+            
             <li class="treeview active">
                 <a href="#">
                     <i class="glyphicon glyphicon-list"></i> <span>รายงาน-HOSxP</span>
@@ -55,6 +58,9 @@ use yii\bootstrap\Nav;
                     </li> 
                 </ul>                
                 </ul>
+                 <?php }?>   
+                
+ <?php } ?>                
                 <ul class="sidebar-menu">
             <!--        //เมนูการตั้งค่าให้ยุบ-ย่อได้-->            
             <li class="treeview active">
