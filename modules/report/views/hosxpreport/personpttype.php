@@ -6,6 +6,7 @@ use yii\data\ArrayDataProvider;
 use kartik\grid\GridView;
 use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
 ?>
 <?php $form = ActiveForm::begin(['method' => 'get',
 'action' => Url::to(['hosxpreport/personpttype'])]);?>
@@ -48,8 +49,8 @@ use kartik\widgets\Select2;
         </div>  
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <?php
-                $a = ['10' => 'จ่ายเงินสด', '89' => 'บัตรทอง'];
-        //$a =    ArrayHelper::map(::find()->all(), 'pttype', 'name');
+               // $a = ['10' => 'จ่ายเงินสด', '89' => 'บัตรทอง'];
+        $a =    ArrayHelper::map(app\models\Pttype::find()->all(), 'pttype', 'name');
             echo Select2::widget([
                 'name' => 'pttype',
                 'data' => $a,

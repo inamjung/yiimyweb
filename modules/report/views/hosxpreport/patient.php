@@ -56,23 +56,26 @@ $gridColumns = [
         'label' => 'นามสกุล',
         'headerOptions' => ['class' => 'text-center']
     ],
-//    [
-//        'attribute' => 'cid',
-//        'label' => 'จำนวน',
-//        'headerOptions' => ['class' => 'text-center'],
-//        'contentOptions' => ['class' => 'text-center'],
-//        'format' => 'raw',
-//        'value' => function($model)use($cid) {
-//            return Html::a(Html::encode($model['a']), [
-//                '/report/hosxpreport/subopddiag',
-//                'cid' => $model['cid'],
-//                
-//                
-//             
-//                    ]
-//    );
-//}
-//    ],
+    [
+        'attribute' => 'cid',
+        'label' => 'จำนวน',
+        'headerOptions' => ['class' => 'text-center'],
+        'contentOptions' => ['class' => 'text-center'],
+        'format' => 'raw',
+        'value' => function($model)use($cid) {
+            return Html::a(Html::encode($model['cid']), [
+                '/report/hosxpreport/insertpt',
+                'cid' => $model['cid'],
+                'hn' => $model['hn'],
+                'pname' => $model['pname'],
+                'fname' => $model['fname'],
+                'lname' => $model['lname'],
+                
+             
+                    ]
+    );
+}
+    ],
 ];
 echo GridView::widget([
     'dataProvider' => $dataProvider,

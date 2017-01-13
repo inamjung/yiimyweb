@@ -4,6 +4,10 @@ namespace app\modules\report\controllers;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
 use Yii;
+use app\models\Patient;
+use yii\helpers\Url;
+
+
 class HosxpreportController extends Controller{
     
     public function actionPersonpttype($date1=null,$date2=null,$pttype=null){
@@ -110,7 +114,7 @@ class HosxpreportController extends Controller{
         
         $sql = "select cid , hn, pname ,fname,lname 
                 from patient 
-                where cid='3430300510561'";
+                where cid='$cid'";
         
          try {
             $rawData = \Yii::$app->db2->createCommand($sql)->queryAll();
@@ -128,9 +132,19 @@ class HosxpreportController extends Controller{
         ]);
     }
     
-    public function acionInsertpt(){
+    public function acionInsertpt($cid=null,$hn=null,$pname=null,$fname=null,$lname=null){
         
-        //$pt = new ;
+        $pt = new \app\models\Patient();
+        
+        $pt->cid = $cid;
+        $pt->hn = $hn;
+        $pt->pname = $pname;
+        $pt->fname = $fname;
+        $pt->lname = $lname;
+        
+        
+        $pt->save();
+        return $this->redirect(['hosxpreport/patient']);
     }
 }
 
