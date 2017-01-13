@@ -22,11 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'avatar',
+           [
+                'attribute' => 'avatar',
+                'format' => 'html',
+                'value' => function($model) {
+                    return html::img('avatars/' . $model->avatar, ['class' => 'thumbnail-responsive',
+                                'style' => 'width: 100px;']);
+                }
+                    ],
             'username',
             'department_id',
             'name',

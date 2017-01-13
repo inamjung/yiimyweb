@@ -12,25 +12,37 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['readonly'=>true,'maxlength' => true]) ?>
     
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'department_id')->widget(kartik\widgets\Select2::className(),[
         'data'=>  \yii\helpers\ArrayHelper::map(app\models\Departments::find()->all(), 'id', 'name'),
         'options'=>[
-            'allowClear'=>true
+            'placeholder'=>'<-- ระบุแผนก -->'           
         ],
         'pluginOptions'=>[
-            'placeholder'=>'<-- ระบุแผนก -->'
+             'allowClear'=>true
         ]
     ]) ?>
     
-    <?= $form->field($model, 'position_id')->textInput() ?>
+    <?= $form->field($model, 'position_id')->widget(kartik\widgets\Select2::className(),[
+        'data'=>  \yii\helpers\ArrayHelper::map(app\models\Positions::find()->all(), 'id', 'name'),
+        'options'=>[
+            'placeholder'=>'<-- ระบุตำแหน่ง -->'           
+        ],
+        'pluginOptions'=>[
+             'allowClear'=>true
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'avatar')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'avatar_img')->label('รูปประจำตัว')->fileInput() ?>  
+   
+           <?php if ($model->avatar) { ?>
+                  <?php  Html::img('avatars/' . $model->avatar, ['class' => 'img-responsive img-circle', 'width' => '150px;']); ?>
+           <?php } ?> 
 
 
 
