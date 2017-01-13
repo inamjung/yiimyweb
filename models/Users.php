@@ -67,7 +67,7 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
+            'username' => 'ชื่อเข้าใช้งาน',
             'email' => 'Email',
             'password_hash' => 'Password Hash',
             'auth_key' => 'Auth Key',
@@ -90,5 +90,11 @@ class Users extends \yii\db\ActiveRecord
             'name' => 'ชื่อ-สกุล',
             'position_id' => 'ตำแหน่ง',
         ];
+    }
+    public function getDepuser(){
+        return $this->hasOne(Departments::className(), ['id'=>'department_id']);
+    }
+    public function getPosuser(){
+        return $this->hasOne(Positions::className(), ['id'=>'position_id']);
     }
 }

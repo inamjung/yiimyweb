@@ -35,9 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                     ],
             'username',
-            'department_id',
+            //'department_id',
+            'depuser.name',
             'name',
-            'position_id',
+            'posuser.name',
             'email:email',
 //            'password_hash',
 //            'auth_key',
