@@ -90,7 +90,7 @@ $config = [
         'rbac' => 'dektrium\rbac\RbacWebModule',
         'admin' => [
             'class' => 'mdm\admin\Module',
-            'laout'=>'left-menu'
+            'layout'=>'left-menu'
             ],
     ],
     'as access' => [
