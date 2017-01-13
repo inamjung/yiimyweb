@@ -18,8 +18,8 @@ class RepairsSearch extends Repairs
     public function rules()
     {
         return [
-            [['id', 'department_id', 'tool_id', 'user_id'], 'integer'],
-            [['datenotuse', 'problem', 'stage', 'startdate', 'satatus', 'dateplan', 'remark', 'answer', 'enddate', 'createDate', 'updateDate', 'approve'], 'safe'],
+            [['id', 'department_id', 'user_id'], 'integer'],
+            [['tool_id','datenotuse', 'problem', 'stage', 'startdate', 'satatus', 'dateplan', 'remark', 'answer', 'enddate', 'createDate', 'updateDate', 'approve'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class RepairsSearch extends Repairs
             'id' => $this->id,
             'department_id' => $this->department_id,
             'datenotuse' => $this->datenotuse,
-            'tool_id' => $this->tool_id,
+            //'tool_id' => $this->tool_id,
             'startdate' => $this->startdate,
             'dateplan' => $this->dateplan,
             'enddate' => $this->enddate,
@@ -76,7 +76,9 @@ class RepairsSearch extends Repairs
             ->andFilterWhere(['like', 'satatus', $this->satatus])
             ->andFilterWhere(['like', 'remark', $this->remark])
             ->andFilterWhere(['like', 'answer', $this->answer])
-            ->andFilterWhere(['like', 'approve', $this->approve]);
+            ->andFilterWhere(['like', 'approve', $this->approve])
+                ->andFilterWhere(['like', 'tools.name', $this->tool_id])
+                ;
 
         return $dataProvider;
     }

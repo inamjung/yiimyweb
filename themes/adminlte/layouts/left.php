@@ -64,16 +64,21 @@ use yii\bootstrap\Nav;
                 </a>
                 <ul class="treeview-menu">
 
-                    <li><a href="<?php echo Url::to(['/repair/repairs/index']); ?>"><i class="fa fa-circle text-red"></i> 
+                    <li><a href="<?php echo Url::to(['/repair/repairs/indexrepairuser']); ?>"><i class="fa fa-circle text-red"></i> 
                             <span>
                                 แจ้งซ่อม</span><small class="label pull-right bg-aqua"></small>
                         </a>
                     </li>  
-                    <li><a href="<?php echo Url::to(['/repair/repairs/index']); ?>"><i class="fa fa-circle text-yellow"></i> 
+                    <li><a href="<?php echo Url::to(['/repair/repairs/indexnew']); ?>"><i class="fa fa-circle text-yellow"></i> 
                             <span>
-                                รับซ่อม</span><small class="label pull-right bg-aqua"></small>
+                                งานซ่อมใหม่</span><small class="label pull-right bg-aqua"></small>
                         </a>
-                    </li> 
+                    </li>
+                    <li><a href="<?php echo Url::to(['/repair/repairs/indexok']); ?>"><i class="fa fa-circle text-yellow"></i> 
+                            <span>
+                                งานซ่อมเสร็จ</span><small class="label pull-right bg-aqua"></small>
+                        </a>
+                    </li>
                 </ul>                
                 </ul>
 

@@ -40,7 +40,7 @@ class Repairs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['department_id', 'problem', 'user_id'], 'required'],
+            [['department_id', 'problem', 'user_id','datenotuse'], 'required'],
             [['department_id', 'tool_id', 'user_id'], 'integer'],
             [['datenotuse', 'startdate', 'dateplan', 'enddate', 'createDate', 'updateDate'], 'safe'],
             [['problem', 'stage', 'satatus', 'remark', 'answer', 'approve'], 'string'],
@@ -70,5 +70,8 @@ class Repairs extends \yii\db\ActiveRecord
             'updateDate' => 'Update Date',
             'approve' => 'ความเห็นหัวหน้า',
         ];
+    }
+    public function getRepairtool(){
+        return $this->hasOne(Tools::className(), ['id'=>'tool_id']);
     }
 }

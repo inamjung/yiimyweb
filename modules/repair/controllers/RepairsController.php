@@ -8,7 +8,11 @@ use app\modules\repair\models\RepairsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use kartik\widgets\DepDrop;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\Html;
 /**
  * RepairsController implements the CRUD actions for Repairs model.
  */
@@ -33,12 +37,46 @@ class RepairsController extends Controller
      * Lists all Repairs models.
      * @return mixed
      */
+    public function actionIndexnew()
+    {
+        $searchModel = new RepairsSearch(['satatus'=>'รอรับงาน']);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexnew', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionIndexok()
+    {
+        $searchModel = new RepairsSearch(['satatus'=>'รอรับงาน']);
+        $searchModel->answer = 'ซ่อมเสร็จแล้ว';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexok', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
     public function actionIndex()
     {
         $searchModel = new RepairsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionIndexrepairuser()
+    {
+        $searchModel = new RepairsSearch();
+        $searchModel->department_id = Yii::$app->user->identity->department_id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexrepairuser', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -69,6 +107,7 @@ class RepairsController extends Controller
             
             $model->createDate = date('Y-m-d');
             $model->user_id = Yii::$app->user->identity->id;
+            //$model->department_id = Yii::$app->user->identity->department_id;
             $model->save();
             return $this->redirect(['index']);
         } else {
@@ -87,12 +126,33 @@ class RepairsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $re = ArrayHelper::map($this->getTool($model->department_id),'id','name');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                're'=>$re
+            ]);
+        }
+    }
+    
+    public function actionUpdatenew($id)
+    {
+        $model = $this->findModel($id);
+        $re = ArrayHelper::map($this->getTool($model->department_id),'id','name');
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('updatenew', [
+                'model' => $model,
+                're'=>$re
             ]);
         }
     }
@@ -124,5 +184,31 @@ class RepairsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionGetTool(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != NULL){
+                $department_id = $parents[0];
+                $out = $this->getTool($department_id);
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }  
+     protected function getTool($id){
+        $datas = \app\modules\repair\models\Tools::find()->where(['department_id'=>$id])->all();
+        return $this->MapData($datas,'id','name');
+    } 
+    
+    protected function MapData($datas,$fieldID,$fieldName){
+        $obj = [];
+        foreach ($datas as $key => $value){
+            array_push($obj, ['id'=>$value->{$fieldID},'name'=>$value->{$fieldName}]);
+        }
+        return $obj;
     }
 }

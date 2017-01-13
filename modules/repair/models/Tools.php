@@ -38,6 +38,7 @@ class Tools extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['buy_date', 'exp_date'], 'safe'],
             [['name', 'picture'], 'string', 'max' => 255],
+            [['use'],'default','value'=>1]
         ];
     }
 
